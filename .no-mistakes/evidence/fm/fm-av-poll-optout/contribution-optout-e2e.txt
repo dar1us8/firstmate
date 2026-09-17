@@ -1,0 +1,24 @@
+1. Register a PR before opting out
+   registered checks: contributions.check.sh,delivery.check.sh
+   contribution check present: yes
+
+2. Use the supported durable opt-out
+   command output: unregistered: state/contributions.check.sh
+   command output: disabled: config/contributions-poll-disabled
+   durable flag present: yes
+   contribution check present: no
+   unrelated PR check retained: yes
+
+3. Simulate startup auto-arm while disabled
+   GitHub calls: 0
+   contribution check recreated: no
+
+4. Register the PR again while disabled
+   GitHub calls (explicit PR-head read only):
+     pr view https://github.com/o/r/pull/8 --json headRefOid -q .headRefOid
+   contribution check recreated: no
+
+5. Invoke the contribution poll while disabled
+   poll output bytes: 0
+   GitHub calls: 0
+   RESULT: durable opt-out survived startup/PR auto-arm and prevented contribution forge reads.
