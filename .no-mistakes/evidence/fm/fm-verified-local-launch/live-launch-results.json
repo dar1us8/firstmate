@@ -1,0 +1,166 @@
+[
+  {
+    "label": "ship-a",
+    "result": "pass",
+    "worktree": "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-5a1922/1/project",
+    "head": "b700f21d2e899f7e04ab0aff827265e304ae9955",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "ship-b",
+    "result": "pass",
+    "worktree": "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-5a1922/2/project",
+    "head": "b700f21d2e899f7e04ab0aff827265e304ae9955",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "scout",
+    "result": "pass",
+    "worktree": "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-5a1922/3/project",
+    "head": "b700f21d2e899f7e04ab0aff827265e304ae9955",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "dirty-acquired",
+    "result": "pass",
+    "refusal": "is not clean",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "changed-tip",
+    "result": "pass",
+    "refusal": "exactly matching",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "wrong-acquired-head",
+    "result": "pass",
+    "refusal": "acquired HEAD",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "wrong-sha",
+    "result": "pass",
+    "refusal": "exactly matching",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "missing-object",
+    "result": "pass",
+    "refusal": "locally available commit",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "short-sha",
+    "result": "pass",
+    "refusal": "full lowercase commit SHA",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "dirty-source",
+    "result": "pass",
+    "refusal": "spawning project is not clean",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "missing-default",
+    "result": "pass",
+    "refusal": "unambiguous local symbolic origin/HEAD",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "ambiguous-branch",
+    "result": "pass",
+    "refusal": "refusing ambiguous Treehouse base selection",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "orca",
+    "result": "pass",
+    "refusal": "requires a Treehouse-backed",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "relaunch",
+    "result": "pass",
+    "refusal": "only to fresh ship/scout",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "secondmate",
+    "result": "pass",
+    "refusal": "only to fresh ship/scout",
+    "treehouse_transport": [],
+    "transport_commands": []
+  },
+  {
+    "label": "default-unreachable",
+    "result": "pass",
+    "refusal": "did not enter an isolated worktree",
+    "treehouse_transport": [
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "fetch",
+        "origin"
+      ]
+    ],
+    "transport_commands": [
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "fetch",
+        "origin"
+      ]
+    ]
+  },
+  {
+    "label": "default-fetch",
+    "result": "pass",
+    "worktree": "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-fa49ac/1/project",
+    "head": "b700f21d2e899f7e04ab0aff827265e304ae9955",
+    "treehouse_transport": [
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "fetch",
+        "origin"
+      ]
+    ],
+    "transport_commands": [
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "-C",
+        "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-fa49ac/1/project",
+        "fetch",
+        "--quiet",
+        "origin"
+      ],
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "-C",
+        "/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-tknntyca/slots/.treehouse/project-fa49ac/1/project",
+        "fetch",
+        "--quiet",
+        "origin",
+        "+refs/heads/trunk:refs/remotes/origin/trunk"
+      ],
+      [
+        "/Library/Developer/CommandLineTools/usr/bin/git",
+        "fetch",
+        "origin"
+      ]
+    ]
+  }
+]

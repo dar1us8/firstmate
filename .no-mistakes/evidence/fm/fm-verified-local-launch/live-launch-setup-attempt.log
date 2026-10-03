@@ -1,0 +1,27 @@
+$ bin/fm-lab-home.sh create /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/home
+/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/home
+exit=0
+$ git init -q -b trunk /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/project
+exit=0
+$ git clone -q --bare /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/project /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/origin.git
+exit=0
+$ tmux -L fm-local-live-46906 -f /dev/null new-session -d -s local-base -x 120 -y 40 -c /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/project /bin/bash --noprofile --norc
+exit=0
+$ tmux -L fm-local-live-46906 set-option -g default-shell /bin/bash
+exit=0
+$ tmux -L fm-local-live-46906 set-option -g default-command /bin/bash --noprofile --norc
+exit=0
+$ bin/fm-brief.sh lv-46906-ship-a project --mode no-mistakes
+scaffolded: /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/home/data/lv-46906-ship-a/brief.md (ship, mode=no-mistakes; replace {TASK} and {FIRSTMATE_SPEC})
+exit=0
+$ bin/fm-spawn.sh lv-46906-ship-a /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/project --backend tmux --harness /bin/bash /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/receiver.sh --mode no-mistakes --yolo off --local-base ffdb1558c811a0c103b3df764f2f82753457edf4
+spawned lv-46906-ship-a harness=bash kind=ship mode=no-mistakes yolo=off window=local-base:fm-lv-46906-ship-a worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/slots/.treehouse/project-91e4c1/1/project
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/home
+exit=0
+$ git -C /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/slots/.treehouse/project-91e4c1/1/project rev-parse HEAD
+ffdb1558c811a0c103b3df764f2f82753457edf4
+exit=0
+$ git -C /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/live-base-yrldrj_n/slots/.treehouse/project-91e4c1/1/project status --porcelain
+exit=0
+$ tmux -L fm-local-live-46906 kill-server
+exit=0

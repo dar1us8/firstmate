@@ -1,0 +1,124 @@
+FM_TEST_BEGIN 2026-10-03T15:04:11Z tests/fm-spawn-pool-base-freshen.test.sh family=standalone expected_gate_skip=none
+ok - real Treehouse interactive acquisition and tmux launch retain the same verified commit with zero transport attempts
+ok - explicit local base launches from the verified non-main default tip with zero transport attempts
+ok - explicit local base refuses mismatch without fetching, resetting, or publishing
+ok - explicit local base refuses missing without fetching, resetting, or publishing
+ok - explicit local base refuses short without fetching, resetting, or publishing
+ok - explicit local base refuses empty without fetching, resetting, or publishing
+ok - explicit local base refuses dirty-source without fetching, resetting, or publishing
+ok - explicit local base refuses dirty-pool without fetching, resetting, or publishing
+ok - explicit local base refuses missing-default without fetching, resetting, or publishing
+ok - explicit local base refuses local-branch-mismatch without fetching, resetting, or publishing
+ok - explicit local base refuses changed-tip without fetching, resetting, or publishing
+ok - explicit local base refuses wrong-head without fetching, resetting, or publishing
+ok - explicit local base refuses foreign-copy without fetching, resetting, or publishing
+ok - explicit local base refuses unknown-slot without fetching, resetting, or publishing
+ok - explicit local base refuses unsafe-claim without fetching, resetting, or publishing
+ok - explicit local base refuses unsupported-treehouse without fetching, resetting, or publishing
+ok - explicit local base refuses orca without fetching, resetting, or publishing
+ok - explicit local base refuses relaunch without fetching, resetting, or publishing
+ok - explicit local base refuses secondmate without fetching, resetting, or publishing
+ok - explicit local base preserves isolation against primary aliases
+ok - explicit local base requires independent per-project verification rather than batch launch
+# remote-seeded Treehouse spawn command
+$ FM_HOME=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/remote-seeded/home bin/fm-spawn.sh pool-remote-seeded-r13 /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/remote-seeded/project --scout
+spawned pool-remote-seeded-r13 harness=codex kind=scout window=firstmate:fm-pool-remote-seeded-r13 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/remote-seeded/pool
+exit=0
+published worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/remote-seeded/pool
+resolved project lock=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/remote-seeded/home/state/.treehouse-project-b1dd5e70dfb2b9de411358242808115d1ebf6d95.lock
+ok - a remote-seeded secondmate home allocates and launches from its Treehouse pool
+ok - a Treehouse slot claim names the launched task, refuses when unclaimable, and is dropped by a locked abort
+# evidence begin: linked-home spawn, returned=primary
+$ bin/fm-spawn.sh pool-linked-primary-r12 /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary/secondmate --scout
+error: treehouse get did not enter an isolated worktree within 60s (last seen '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary/project': it is the repository's primary checkout (its git dir is the spawning project's common git dir); spawning project '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary/secondmate'); inspect window firstmate:fm-pool-linked-primary-r12
+exit=1
+primary HEAD before=ca58af758547afa0b9d4b9a3f51735e23c8e0a51 after=ca58af758547afa0b9d4b9a3f51735e23c8e0a51
+primary reflog before:
+ca58af7 HEAD@{0}: commit (initial): initial
+primary reflog after:
+ca58af7 HEAD@{0}: commit (initial): initial
+FETCH_HEAD absent
+task metadata absent
+# evidence end
+ok - linked spawning home: primary preserves the primary before any refresh
+# evidence begin: linked-home spawn, returned=primary-alias
+$ bin/fm-spawn.sh pool-linked-primary-alias-r12 /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary-alias/secondmate --scout
+error: treehouse get did not enter an isolated worktree within 60s (last seen '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary-alias/primary-alias': it is the repository's primary checkout (its git dir is the spawning project's common git dir); spawning project '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-primary-alias/secondmate'); inspect window firstmate:fm-pool-linked-primary-alias-r12
+exit=1
+primary HEAD before=2919dfdb69f76d6ddc752d3c21791416e12d39c0 after=2919dfdb69f76d6ddc752d3c21791416e12d39c0
+primary reflog before:
+2919dfd HEAD@{0}: commit (initial): initial
+primary reflog after:
+2919dfd HEAD@{0}: commit (initial): initial
+FETCH_HEAD absent
+task metadata absent
+# evidence end
+ok - linked spawning home: primary-alias preserves the primary before any refresh
+# evidence begin: linked-home spawn, returned=spawning
+$ bin/fm-spawn.sh pool-linked-spawning-r12 /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-spawning/secondmate --scout
+error: treehouse get did not enter an isolated worktree within 60s (last seen '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-spawning/secondmate': it is the spawning project itself; spawning project '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-spawning/secondmate'); inspect window firstmate:fm-pool-linked-spawning-r12
+exit=1
+primary HEAD before=ca5ea0df6c61b60449c43c0e5c07331b836b0e2e after=ca5ea0df6c61b60449c43c0e5c07331b836b0e2e
+primary reflog before:
+ca5ea0d HEAD@{0}: commit (initial): initial
+primary reflog after:
+ca5ea0d HEAD@{0}: commit (initial): initial
+FETCH_HEAD absent
+task metadata absent
+# evidence end
+ok - linked spawning home: spawning preserves the primary before any refresh
+# evidence begin: linked-home spawn, returned=scout
+$ bin/fm-spawn.sh pool-linked-scout-r12 /Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-scout/secondmate --scout
+spawned pool-linked-scout-r12 harness=codex kind=scout window=firstmate:fm-pool-linked-scout-r12 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-scout/pool
+exit=0
+primary HEAD before=90d083b4c9d01e45cfcf639b1bf91dabaf1c7a6d after=90d083b4c9d01e45cfcf639b1bf91dabaf1c7a6d
+primary reflog before:
+90d083b HEAD@{0}: commit (initial): initial
+primary reflog after:
+90d083b HEAD@{0}: commit (initial): initial
+FETCH_HEAD absent
+saved task metadata:
+window=firstmate:fm-pool-linked-scout-r12
+endpoint_task_id=pool-linked-scout-r12
+worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-scout/pool
+project=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/linked-scout/secondmate
+harness=codex
+kind=scout
+tasktmp=/tmp/fm-pool-linked-scout-r12
+model=default
+effort=default
+spawn_gen=s1791039902.55348.8902
+worker HEAD=bb0af65f3ddbaeebe7b13d68754a429b7fe16382 origin/main=bb0af65f3ddbaeebe7b13d68754a429b7fe16382
+# evidence end
+ok - linked spawning home: scout preserves the primary before any refresh
+# observed spawn: spawned pool-current-base-r1 harness=codex kind=ship mode=no-mistakes yolo=off window=firstmate:fm-pool-current-base-r1 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/current-base/pool
+# observed base: HEAD=8947c55eae37efbf66b424a1ac3b05f9ac93f123 origin/main=8947c55eae37efbf66b424a1ac3b05f9ac93f123 advanced-main=must survive a newly spawned branch
+ok - a stale pooled worktree refreshes to current origin/main before a crew branch is created
+ok - a stale pooled worktree resolves and refreshes a non-main default branch
+# observed direct-pr spawn: spawned pool-direct-pr-r3 harness=codex kind=ship mode=direct-PR yolo=off window=firstmate:fm-pool-direct-pr-r3 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/direct-pr/pool
+# observed scout spawn: spawned pool-scout-r3 harness=codex kind=scout window=firstmate:fm-pool-scout-r3 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/scout/pool
+ok - direct-PR ships and scouts both refresh stale pooled worktrees before launch
+# observed dirty refusal: error: pooled worktree '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/dirty-refusal/pool' is not clean; refusing to discard uncommitted work while refreshing its base; preserved=keep this local work
+ok - a dirty pooled worktree is refused without discarding its local work
+# observed unresolved-default refusal: error: could not resolve origin's current default branch for pooled worktree '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/unresolved-default/pool'; refusing to launch from a potentially stale base
+ok - an unresolved remote default branch refuses the pooled worktree
+# observed unreachable-origin refusal: error: could not fetch origin for pooled worktree '/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/unreachable-origin/pool'; refusing to launch from a potentially stale base
+ok - an unreachable origin refuses a potentially stale pooled worktree
+# observed origin-less launch: spawned pool-originless-r6 harness=codex kind=ship mode=no-mistakes yolo=off window=firstmate:fm-pool-originless-r6 worktree=/Users/darrylkwan/.no-mistakes/worktrees/ed75b620a487/01M414EE49HY4BQ9F5YY638BDM/.test-tmp/fm-spawn-pool-base-freshen.lvZgM1/originless/pool
+ok - an origin-less pooled worktree launches as-is, skipping the freshness gate
+ok - a dirty origin-less pooled worktree is refused without discarding its local work
+ok - an origin configuration without a URL refuses the pooled worktree
+ok - an empty origin configuration section refuses the pooled worktree
+ok - an empty-only included origin section documents the accepted detection boundary
+ok - an inactive conditional origin include leaves the pooled worktree origin-less
+# observed stale-pin refusal: error: submodule 'ui' is checked out at 80921969b92132e1ce9aac601c840e78f1a13f66, but this base records 04bdf7f9ebc9eb82e14f43b8be57d826e3229543
+ok - an origin-less pool with a stale submodule pin refuses while naming both pins and no remedy
+ok - an unpushed submodule commit keeps the uncommitted-work refusal and survives it
+ok - work inside a submodule is still refused as uncommitted work, not called stale
+ok - a stale pin carrying real work is refused conservatively, never called stale
+ok - a stale pin beside other dirt yields the conservative refusal alone, with no stale-pin line
+# all fm-spawn-pool-base-freshen tests passed
+FM_TEST_END 2026-10-03T15:06:10Z tests/fm-spawn-pool-base-freshen.test.sh exit=0 duration_ms=118995 gate_skip=false
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0 duration_ms=119073
+FM_TEST_SUMMARY_FAMILY family=standalone count=1 duration_ms=118995 failed=0
+FM_TEST_SLOWEST rank=1 script=tests/fm-spawn-pool-base-freshen.test.sh duration_ms=118995
