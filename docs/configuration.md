@@ -604,13 +604,7 @@ The flag is a home-local supervision-noise preference and is not inherited by se
 
 ## Contribution poll opt-out (config/contributions-poll-disabled)
 
-`config/contributions-poll-disabled` is an optional local, gitignored presence flag that durably opts this home out of automatic contribution observation.
-`bin/fm-contributions.sh disable` writes it and retires any registered contribution check through `bin/fm-check-unregister.sh`; `bin/fm-contributions.sh enable` removes it and re-arms observation for owned contributions.
-Calling `bin/fm-check-unregister.sh contributions` alone only retires the current registration and is not a durable opt-out because startup or PR registration can restore it.
-While the flag exists, `poll` and every automatic `arm` path - startup session arming and PR registration - are silent no-ops, so no GitHub subprocess runs and neither path can restore the poll.
-Explicitly requested forge operations, the exact merged-state PR poll, and every other check are unaffected; cached contribution records stay readable without a forge read.
-The flag is per home and is not inherited by secondmate homes, which set their own posture.
-Only the file's presence is read; `bin/fm-contributions.sh`'s header owns the exact enable and disable procedure.
+For the durable contribution-poll opt-out, see the [`bin/fm-contributions.sh` header and `--help`](../bin/fm-contributions.sh), which own the enable and disable commands, presence-flag semantics, automatic arming behavior, unaffected operations, and per-home scope.
 
 ## Parked-gate wait deferral (config/wedge-defer-parked-gate)
 

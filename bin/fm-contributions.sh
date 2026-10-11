@@ -93,15 +93,19 @@
 # arm registers the existing authenticated custom-check path. Startup and PR
 # registration call it; when filing a linked upstream issue, call arm as well.
 #
-# config/contributions-poll-disabled is this home's durable opt-out; this
-# script is its single writer and reader. disable writes that flag and retires
+# config/contributions-poll-disabled is this home's optional local, gitignored
+# durable opt-out; only its presence is read, and this script is its single
+# writer and reader. disable writes that flag and retires
 # any registered check through fm-check-unregister.sh. While the flag exists,
 # poll and every arm path - startup's arm --if-owned and PR registration's
 # arm - succeed as silent no-ops, so no forge subprocess runs and neither can
 # restore the poll. enable removes the flag and arms --if-owned, so owned
 # contributions are observed again. Explicitly requested forge operations,
 # the exact merged-state PR poll, and every other check are untouched. The
-# flag is per home and is not inherited.
+# flag is per home and is not inherited. Cached contribution records remain
+# readable without a forge read. Unregistering contributions alone is not a
+# durable opt-out because a later arm can restore the check.
+# Opt-out behavior is verified by tests/fm-contributions.test.sh.
 # jq_lib receives literal jq programs, not shell expressions.
 # shellcheck disable=SC2016
 set -eu
