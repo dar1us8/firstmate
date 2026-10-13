@@ -1,0 +1,4 @@
+ok - assume-unchanged: repeated hidden-edit refusal preserves files/index/HEAD/task/lease/owner
+ok - skip-worktree: repeated hidden-edit refusal preserves files/index/HEAD/task/lease/owner
+ok - same edit without index flags still reaches the normal dirty refusal
+ok - hidden-index inspection failure refuses before return or record removal

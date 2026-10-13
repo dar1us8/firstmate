@@ -1,0 +1,37 @@
+[
+  {
+    "name": "assume-unchanged hidden edits",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "skip-worktree hidden edits",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "combined hidden flags",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "clean assume-unchanged entry",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "clean skip-worktree entry",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "ordinary visible edits",
+    "result": "pass",
+    "live": true
+  },
+  {
+    "name": "unreadable corrupt index",
+    "result": "pass",
+    "live": true
+  }
+]

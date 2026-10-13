@@ -1,0 +1,621 @@
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-lab-home.sh', 'create', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip']
+/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+exit=0
+
+$ ['tasks-axi', 'add', 'task-x1', 'hidden-index preservation', '--kind', 'ship', '--file', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md']
+ok: added task-x1 (ship) -> Queued
+task:
+  id: task-x1
+  title: hidden-index preservation
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-12
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+help[2]:
+  - Run `tasks-axi start task-x1 --file=/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md` to move it to in flight
+  - Run `tasks-axi block task-x1 --by <other> --file=/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md` to record a dependency
+exit=0
+
+$ ['tasks-axi', 'start', 'task-x1', '--file', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md']
+ok: start task-x1 -> In flight
+help[1]:
+  - Run `tasks-axi done task-x1 --pr <url> --file=/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md` when it ships
+exit=0
+
+$ ['git', 'init', '-q', '-b', 'main', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/seed']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/seed', 'add', '.']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/seed', 'commit', '-qm', 'baseline']
+exit=0
+
+$ ['git', 'clone', '-q', '--bare', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/seed', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/origin.git']
+exit=0
+
+$ ['git', 'clone', '-q', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/origin.git', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project']
+exit=0
+
+$ ['treehouse', 'get', '--lease', '--lease-holder', 'task-x1', '--json', '--no-fetch']
+{"path":"/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project","lease_id":"a6a4a72d3b9cd2f57571f9f7828423b2","lease_holder":"task-x1","leased_at":"2026-10-12T20:51:36.932287-04:00"}
+🌳 Setting up worktree...
+🌳 Leased worktree at /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project. Run 'treehouse return /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project' to release it.
+exit=0
+
+Real Treehouse lease: {"path": "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project", "lease_id": "a6a4a72d3b9cd2f57571f9f7828423b2", "lease_holder": "task-x1", "leased_at": "2026-10-12T20:51:36.932287-04:00"}
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'switch', '-c', 'fm/task-x1']
+Switched to a new branch 'fm/task-x1'
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', '--path-format=absolute', '--git-path', 'index']
+/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+h -dash.txt
+h "hidden\nname.txt"
+h hidden proof.txt
+h "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "2931527993bcb81d81c713a69de2727f4d095e95db87d3a78646deb4ddcb60c4",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+●  WATCHER DOWN - SUPERVISION IS OFF
+●  1 task(s) in flight, but no live watcher process holds this home lock (last beat: 1s ago).
+●  Trust the emitted supervision protocol for this harness; do not use shell & for watcher repair.
+●  This is a supervision warning only; the guarded operation WILL still run.
+●  repair a missing or failed watcher cycle with the Pi tool fm_watch_arm_pi, or restart Pi with -e /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.pi/extensions/fm-primary-turnend-guard.ts -e /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.pi/extensions/fm-primary-pi-watch.ts if the extensions are not loaded.
+●━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "2931527993bcb81d81c713a69de2727f4d095e95db87d3a78646deb4ddcb60c4",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+assume-unchanged hidden edits attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 3s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "2931527993bcb81d81c713a69de2727f4d095e95db87d3a78646deb4ddcb60c4",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+assume-unchanged hidden edits attempt 2: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+S -dash.txt
+S "hidden\nname.txt"
+S hidden proof.txt
+S "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "361dde5b62afd6daacd22927df4f9b24a44ddff8c02c1836b9dc7a24c2f08a2b",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 4s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "361dde5b62afd6daacd22927df4f9b24a44ddff8c02c1836b9dc7a24c2f08a2b",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+skip-worktree hidden edits attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 5s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "361dde5b62afd6daacd22927df4f9b24a44ddff8c02c1836b9dc7a24c2f08a2b",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+skip-worktree hidden edits attempt 2: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+s -dash.txt
+s "hidden\nname.txt"
+s hidden proof.txt
+s "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "3d7244abb8bbc47d2e593b0e1d1ebb310ace13bcef7ae72f6e106808b092aaf3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 6s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "3d7244abb8bbc47d2e593b0e1d1ebb310ace13bcef7ae72f6e106808b092aaf3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+combined hidden flags attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 7s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "3d7244abb8bbc47d2e593b0e1d1ebb310ace13bcef7ae72f6e106808b092aaf3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+combined hidden flags attempt 2: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+h -dash.txt
+h "hidden\nname.txt"
+h hidden proof.txt
+h "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "2931527993bcb81d81c713a69de2727f4d095e95db87d3a78646deb4ddcb60c4",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 8s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "2931527993bcb81d81c713a69de2727f4d095e95db87d3a78646deb4ddcb60c4",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+clean assume-unchanged entry attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+S -dash.txt
+S "hidden\nname.txt"
+S hidden proof.txt
+S "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "361dde5b62afd6daacd22927df4f9b24a44ddff8c02c1836b9dc7a24c2f08a2b",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 9s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has tracked entries marked assume-unchanged or skip-worktree.
+  -dash.txt
+  $'hidden\nname.txt'
+  hidden\ proof.txt
+  $'tab\tname.txt'
+Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "361dde5b62afd6daacd22927df4f9b24a44ddff8c02c1836b9dc7a24c2f08a2b",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+clean skip-worktree entry attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+ M -dash.txt
+ M "hidden\nname.txt"
+ M "hidden proof.txt"
+ M "tab\tname.txt"
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+H -dash.txt
+H "hidden\nname.txt"
+H hidden proof.txt
+H "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "09b5fed77fb57a51381c4aaaf535260e4d6ce51321ef92c01089cd0a7169bffc",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 11s ago, grace 300s) - full banner already printed this episode.
+REFUSED: worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project has uncommitted changes.
+uncommitted changes present (includes tracked edits)
+Commit them (or get the captain's explicit OK to discard, then --force).
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "09b5fed77fb57a51381c4aaaf535260e4d6ce51321ef92c01089cd0a7169bffc",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "36d88675afed4665b52eeb13d51443627c76d281be7ced1de65f698de91ef145",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "243303ef89ebf1ac4a3419a1dbbcfea6ab489ccbb68e7fd406bb21d8c18201a3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "672abd62764af9682a9b937835498f351b03009e441fa798164ff9de75f9a5a5",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "6567a0e5a257fc5b02eac2889ec50ce9207a86ec26a9018fe1b1d179e72d8f62"
+}
+
+ordinary visible edits attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-assume-unchanged', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'update-index', '--no-skip-worktree', '--', 'hidden proof.txt', 'hidden\nname.txt', '-dash.txt', 'tab\tname.txt']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'status', '--porcelain']
+exit=0
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'ls-files', '-v']
+H -dash.txt
+H "hidden\nname.txt"
+H hidden proof.txt
+H "tab\tname.txt"
+exit=0
+
+Before cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "ea4f36a519017be76d77835ef1403bdd0f1257f4559b04ffe5da47cb32294b29",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+$ ['/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/bin/fm-teardown.sh', 'task-x1']
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip
+WARNING: watcher still down (same stale episode; last beat: 12s ago, grace 300s) - full banner already printed this episode.
+REFUSED: cannot inspect worktree /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project for assume-unchanged or skip-worktree entries.
+Preserve the work and restore index inspection before retrying cleanup.
+exit=1
+
+$ ['git', '-C', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project', 'rev-parse', 'HEAD']
+9de03e20432870a5ac272d762509e650088fbded
+exit=0
+
+After cleanup persistent SHA-256: {
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.meta": "f05d8a8e84eb811f092797de1355ec5e16505c23e11c69c3fd8847a7e0560a8c",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/state/task-x1.status": "b1ab1c8f28ddb3a9693e38b42a5b140e4306eadd20c707c75be1fe63d327b8e3",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md": "23cd0f42a7e03ca8e0e5868dc8e672afea37bb9c4c794cd5eb7146bdc06dbd17",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/.fm-slot-owner": "6c9aaff48734d2f3ae4ce933c437663afa5c6c3d638b66c54f6c068fe8aab91d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/treehouse-state.json": "5319f1a621324847ad0429e085b0e14766be81e179fa736f3bf777bc33f7751d",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/projects/project/.git/worktrees/project/index": "ea4f36a519017be76d77835ef1403bdd0f1257f4559b04ffe5da47cb32294b29",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden proof.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/hidden\nname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/-dash.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e",
+  "/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project/tab\tname.txt": "4b654bd1437066b13498661f3ca14774daf1066d072036beffaf06f0c014250e"
+}
+
+unreadable corrupt index attempt 1: files, index bytes, HEAD, lease, claim, task/status/backlog unchanged; resident process 52642 alive
+
+$ ['treehouse', 'status', '--json']
+[{"name":"1","path":"/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/pool/.treehouse/project-09c6d7/1/project","status":"leased","flavor":"git","lease_id":"a6a4a72d3b9cd2f57571f9f7828423b2","lease_holder":"task-x1","leased_at":"2026-10-12T20:51:36.932287-04:00","processes":[{"pid":52642,"name":"sleep"}]}]
+A new version of treehouse is available: v2.3.0 → v3.1.2
+Run "treehouse update" to update
+
+exit=0
+
+$ ['tasks-axi', 'show', 'task-x1', '--file', '/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SBM3B8AMZFQ4WNCXEVBYEC/.test-hidden-tmp/fm-lab.fmcz9rip/data/backlog.md']
+task:
+  id: task-x1
+  title: hidden-index preservation
+  state: in_flight
+  blocked: no
+  blocked_by: none
+  held: no
+  hold_reason: "-"
+  hold_kind: "-"
+  hold_until: "-"
+  kind: ship
+  repo: "-"
+  priority: "-"
+  created: 2026-10-12
+  closed: "-"
+  deps: none
+  links: none
+  body: ""
+exit=0
