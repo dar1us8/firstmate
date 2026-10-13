@@ -1,0 +1,18 @@
+TARGET 1114ae0a012d30ca42f731ca0009df4f5b851504
+BASE 6407052f4c521e39401ce2305dfa45d201249827
+v24.5.0
+11.6.0
+{
+  "name": "@earendil-works/pi-coding-agent",
+  "version": "1.1.0"
+}
+{
+  "name": "@earendil-works/pi-coding-agent",
+  "version": "1.2.0"
+}
+88fb66dd3ceb2dc707756f57c14f7775441c3e00ebd69e21a5b75e2251c01fab  .pi/extensions/fm-branch-supervision.ts
+4c20b00fe7ccb56e5d101e2b45d871e420bbf1075a9e84c07cb41ccf3fdcf742  .pi/extensions/fm-primary-pi-watch.ts
+69d8f78cf170bf3eb0d2af006bf4f1ccb8c17c57e676140961dd025e3512db35  tests/fm-pi-branch-live-e2e.test.sh
+df5c094e1e91744ba08070748ecec32aa4a527fd41f2995975e64947baeec8ef  .test-independent-round2/sdk12/package-lock.json
+
+Only first probe/fixture replaced in baseline; all production files and remaining baseline probes unchanged.

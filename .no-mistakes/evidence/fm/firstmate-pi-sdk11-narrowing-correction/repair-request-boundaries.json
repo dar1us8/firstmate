@@ -1,0 +1,1439 @@
+{
+  "repair-sdk11-final": {
+    "requests": [
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.zDUE8n/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      },
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.zDUE8n/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "mainInputs": [
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      },
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      }
+    ],
+    "settled": 2,
+    "watch": "arm pid=26116\ntrigger pid=26116 reason=signal: live-sdk probe\nretire pid=26116\narm pid=26137\nconfirmed generation=live-sdk-generation watcher=26137\nretire pid=26137\narm pid=26950\ntrigger pid=26950 reason=signal: live pin probe\nretire pid=26950\narm pid=26968\nconfirmed generation=live-sdk-generation watcher=26968\n"
+  },
+  "repair-sdk11-final-cancellation": [
+    {
+      "mode": "user",
+      "completions": 1,
+      "settled": 1,
+      "requests": [
+        {
+          "model": "fm-live-stream-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.zDUE8n/cancel-home-user\n</cwd>"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Original user turn."
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 512,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "contexts": [
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.zDUE8n/cancel-home-user\n</cwd>"
+            },
+            "timestamp": 1791872483024,
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "Original user turn."
+              }
+            ],
+            "timestamp": 1791872483023
+          }
+        ]
+      ],
+      "cancellation": "not cancelled"
+    }
+  ],
+  "repair-sdk12-final": {
+    "requests": [
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      },
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "mainInputs": [
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      },
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      }
+    ],
+    "settled": 2,
+    "watch": "arm pid=44970\ntrigger pid=44970 reason=signal: live-sdk probe\nretire pid=44970\narm pid=45415\nconfirmed generation=live-sdk-generation watcher=45415\nretire pid=45415\narm pid=47222\ntrigger pid=47222 reason=signal: live pin probe\nretire pid=47222\narm pid=47431\nconfirmed generation=live-sdk-generation watcher=47431\n"
+  },
+  "repair-sdk12-final-cancellation": [
+    {
+      "mode": "processing",
+      "completions": 2,
+      "settled": 3,
+      "requests": [
+        {
+          "model": "fm-live-stream-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-processing\n</cwd>"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Original user turn."
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 512,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "model": "fm-live-stream-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-processing\n</cwd>"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Original user turn."
+                }
+              ]
+            },
+            {
+              "role": "assistant",
+              "content": "ACK"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "A subsequent ordinary user turn."
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 512,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "contexts": [
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-processing\n</cwd>"
+            },
+            "timestamp": 1791872543210,
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "Original user turn."
+              }
+            ],
+            "timestamp": 1791872543210
+          }
+        ],
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-processing\n</cwd>"
+            },
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ],
+            "timestamp": 1791872543210
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "Original user turn."
+              }
+            ],
+            "timestamp": 1791872543210
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "ACK"
+              }
+            ],
+            "api": "openai-completions",
+            "provider": "fm-live-stream",
+            "model": "fm-live-stream-model",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "timestamp": 1791872543244,
+            "responseId": "cancel-probe",
+            "rawStopReason": "stop",
+            "durationMs": 6,
+            "thinkingLevel": "off"
+          }
+        ],
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-processing\n</cwd>"
+            },
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ],
+            "timestamp": 1791872543210
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "Original user turn."
+              }
+            ],
+            "timestamp": 1791872543210
+          },
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "ACK"
+              }
+            ],
+            "api": "openai-completions",
+            "provider": "fm-live-stream",
+            "model": "fm-live-stream-model",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "stop",
+            "timestamp": 1791872543244,
+            "responseId": "cancel-probe",
+            "rawStopReason": "stop",
+            "durationMs": 6,
+            "thinkingLevel": "off"
+          },
+          {
+            "role": "assistant",
+            "content": [],
+            "api": "openai-completions",
+            "provider": "fm-live-stream",
+            "model": "fm-live-stream-model",
+            "usage": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0,
+              "totalTokens": 0,
+              "cost": {
+                "input": 0,
+                "output": 0,
+                "cacheRead": 0,
+                "cacheWrite": 0,
+                "total": 0
+              }
+            },
+            "stopReason": "error",
+            "errorMessage": "This operation was aborted",
+            "timestamp": 1791872543601,
+            "durationMs": 0,
+            "thinkingLevel": "off"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "A subsequent ordinary user turn."
+              }
+            ],
+            "timestamp": 1791872543713
+          }
+        ]
+      ],
+      "cancellation": "before a second provider request; subsequent real request filtered history"
+    },
+    {
+      "mode": "user",
+      "completions": 1,
+      "settled": 1,
+      "requests": [
+        {
+          "model": "fm-live-stream-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-user\n</cwd>"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Original user turn."
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 512,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "contexts": [
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-user\n</cwd>"
+            },
+            "timestamp": 1791872544641,
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "Original user turn."
+              }
+            ],
+            "timestamp": 1791872544640
+          }
+        ]
+      ],
+      "cancellation": "not cancelled"
+    },
+    {
+      "mode": "unrelated",
+      "completions": 1,
+      "settled": 1,
+      "requests": [
+        {
+          "model": "fm-live-stream-model",
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-unrelated\n</cwd>"
+            },
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Unrelated custom turn."
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "stream_options": {
+            "include_usage": true
+          },
+          "store": false,
+          "max_completion_tokens": 512,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "function",
+              "function": {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "contexts": [
+        [
+          {
+            "role": "system",
+            "content": "",
+            "sections": {
+              "preamble": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.",
+              "tools": "<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>",
+              "rules": "<rules>\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>",
+              "docs": "<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>",
+              "cwd": "<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.5Al5HZ/cancel-home-unrelated\n</cwd>"
+            },
+            "timestamp": 1791872545622,
+            "toolsAdded": [
+              {
+                "name": "fm_branch_outcomes",
+                "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "recent": {
+                      "type": "number",
+                      "description": "How many most-recent outcomes to read (default 20)"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "fm_branch_processed",
+                "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+                "parameters": {
+                  "type": "object",
+                  "required": [
+                    "through"
+                  ],
+                  "properties": {
+                    "through": {
+                      "type": "number",
+                      "description": "The highest outcome sequence number this conversation has processed"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "role": "custom",
+            "customType": "fixture",
+            "content": "Unrelated custom turn.",
+            "display": false,
+            "timestamp": 1791872545622
+          }
+        ]
+      ],
+      "cancellation": "not cancelled"
+    }
+  ],
+  "repair-sdk11-baseline-control": {
+    "requests": [
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.sNNkO6/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      },
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /opt/homebrew/lib/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.sNNkO6/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "mainInputs": [
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      },
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      }
+    ],
+    "settled": 2,
+    "watch": "arm pid=59069\ntrigger pid=59069 reason=signal: live-sdk probe\nretire pid=59069\narm pid=59084\nconfirmed generation=live-sdk-generation watcher=59084\nretire pid=59084\narm pid=59892\ntrigger pid=59892 reason=signal: live pin probe\nretire pid=59892\narm pid=59909\nconfirmed generation=live-sdk-generation watcher=59909\n"
+  },
+  "repair-sdk12-baseline-control": {
+    "requests": [
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.kGMH3M/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      },
+      {
+        "model": "fm-live-main-model",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- fm_branch_outcomes: Read what the supervision branch handled (durable outcome store).\n- fm_branch_processed: Acknowledge processed captain-facing supervision outcomes by sequence.\n- fm_watch_arm_pi: Start the first required Pi watcher cycle or repair a cycle reported missing, failed, or unhealthy; ordinary re-arming is automatic.\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Call fm_watch_arm_pi only for the first required cycle or after a notification says the cycle is missing, failed, or unhealthy. Do not call it after ordinary work, turn completion, or ordinary signal, stale, check, or heartbeat handling because the Pi extension owns re-arming. Never run bin/fm-watch-arm.sh through bash.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/README.md\n- Additional docs: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/docs\n- Examples: /Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/sdk12nested/node_modules/@earendil-works/pi-coding-agent/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<cwd>\n/Users/darrylkwan/firstmate/data/factum-v2-validation/nm-home-1.84.0/worktrees/ed75b620a487/01M4SWT4CNM6JV9N63KXVBMVM3/.test-sdk-validation/tmp/fm-pi-branch-live.kGMH3M/home\n</cwd>"
+          },
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned."
+              }
+            ]
+          }
+        ],
+        "stream": true,
+        "stream_options": {
+          "include_usage": true
+        },
+        "store": false,
+        "max_completion_tokens": 512,
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_outcomes",
+              "description": "Read the durable outcome store of the supervision branch: what fleet events it handled, each verdict, and each summary. Use when the captain asks what happened in the fleet.",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "recent": {
+                    "type": "number",
+                    "description": "How many most-recent outcomes to read (default 20)"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_branch_processed",
+              "description": "Acknowledge that every captain-facing supervision outcome up to a sequence number has been processed by this conversation. Call it exactly once after handling a supervision processing request, with through set to the highest sequence that request listed; an outcome that is not acknowledged is presented again.",
+              "parameters": {
+                "type": "object",
+                "required": [
+                  "through"
+                ],
+                "properties": {
+                  "through": {
+                    "type": "number",
+                    "description": "The highest outcome sequence number this conversation has processed"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "fm_watch_arm_pi",
+              "description": "Start the first required Pi watcher cycle, or repair one only after a notification says the cycle is missing, failed, or unhealthy. Do not call after ordinary work or ordinary notifications; the Pi extension re-arms automatically. Never run bin/fm-watch-arm.sh through bash.",
+              "parameters": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "mainInputs": [
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live-sdk probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      },
+      {
+        "type": "input",
+        "text": "\u2063FIRSTMATE_OP: v1 watcher: FIRSTMATE WATCHER WAKE: signal: live pin probe\n\nRun bin/fm-wake-drain.sh first and handle the queued wake. Watcher continuity is extension-owned.",
+        "source": "extension"
+      }
+    ],
+    "settled": 2,
+    "watch": "arm pid=64886\ntrigger pid=64886 reason=signal: live-sdk probe\nretire pid=64886\narm pid=64901\nconfirmed generation=live-sdk-generation watcher=64901\nretire pid=64901\narm pid=65709\ntrigger pid=65709 reason=signal: live pin probe\nretire pid=65709\narm pid=65725\nconfirmed generation=live-sdk-generation watcher=65725\n"
+  }
+}

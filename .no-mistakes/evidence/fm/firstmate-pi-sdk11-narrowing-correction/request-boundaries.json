@@ -1,0 +1,211 @@
+[
+  {
+    "sdk": "1.1.0",
+    "mode": "user",
+    "provider_requests": 1,
+    "settlements": 1,
+    "cancellation": "not cancelled",
+    "actual_provider_messages": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ]
+    ],
+    "actual_request_local_contexts": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "sdk": "1.2.0",
+    "mode": "processing",
+    "provider_requests": 2,
+    "settlements": 3,
+    "cancellation": "before a second provider request; subsequent real request filtered history",
+    "actual_provider_messages": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": "ACK"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "A subsequent ordinary user turn."
+            }
+          ]
+        }
+      ]
+    ],
+    "actual_request_local_contexts": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "ACK"
+            }
+          ],
+          "stopReason": "stop"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "ACK"
+            }
+          ],
+          "stopReason": "stop"
+        },
+        {
+          "role": "assistant",
+          "content": [],
+          "stopReason": "error",
+          "errorMessage": "This operation was aborted"
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "A subsequent ordinary user turn."
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "sdk": "1.2.0",
+    "mode": "user",
+    "provider_requests": 1,
+    "settlements": 1,
+    "cancellation": "not cancelled",
+    "actual_provider_messages": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ]
+    ],
+    "actual_request_local_contexts": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Original user turn."
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "sdk": "1.2.0",
+    "mode": "unrelated",
+    "provider_requests": 1,
+    "settlements": 1,
+    "cancellation": "not cancelled",
+    "actual_provider_messages": [
+      [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Unrelated custom turn."
+            }
+          ]
+        }
+      ]
+    ],
+    "actual_request_local_contexts": [
+      [
+        {
+          "role": "custom",
+          "customType": "fixture",
+          "content": "Unrelated custom turn."
+        }
+      ]
+    ]
+  }
+]
