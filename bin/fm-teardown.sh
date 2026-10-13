@@ -69,8 +69,10 @@
 # teardown refuses rather than risk discarding unlanded work.
 # Ordinary ship cleanup also refuses tracked entries marked assume-unchanged or
 # skip-worktree: Git status can hide their edits. It reports the flagged paths
-# without clearing flags or changing their files; --force and scout scratch
-# semantics retain their existing explicit-discard scope.
+# without clearing flags or changing their files; an index inspection failure
+# also refuses before cleanup. Preserve and reconcile the work before retrying.
+# --force and scout scratch semantics retain their existing explicit-discard scope.
+# tests/fm-teardown.test.sh pins refusal and preservation for hidden-index entries.
 # Uncommitted changes are never landed; dirty refusals distinguish untracked-only
 # leftovers from tracked edits and list at most ten non-exempt untracked paths.
 # local-only projects additionally accept work merged into the local default
@@ -202,9 +204,10 @@
 # never left leased forever. If the treehouse return fails, teardown leaves the
 # leased home and state in place instead of hiding a still-held lease.
 # Usage: fm-teardown.sh <task-id> [--force] [--legacy-record]
-#   --force skips ordinary-task dirty and landed-work checks, skips scout report
-#   checks, and discards secondmate child work for kind=secondmate. Only use it
-#   when the captain has explicitly said to discard the work.
+#   --force skips ordinary-task hidden-index, dirty, and landed-work checks,
+#   skips scout report checks, and discards secondmate child work for
+#   kind=secondmate. Only use it when the captain has explicitly said to discard
+#   the work.
 #   --legacy-record accepts a task record that predates the spawn_gen field:
 #   teardown then proceeds only when the recorded endpoint is confirmed dead or
 #   agent-less (bin/fm-backend.sh's recovery-grade classifier), and without
