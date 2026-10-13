@@ -67,6 +67,10 @@
 # by itself causes a false refusal of landed work.
 # A gh lookup error falls back to the content check; if that is also inconclusive,
 # teardown refuses rather than risk discarding unlanded work.
+# Ordinary ship cleanup also refuses tracked entries marked assume-unchanged or
+# skip-worktree: Git status can hide their edits. It reports the flagged paths
+# without clearing flags or changing their files; --force and scout scratch
+# semantics retain their existing explicit-discard scope.
 # Uncommitted changes are never landed; dirty refusals distinguish untracked-only
 # leftovers from tracked edits and list at most ten non-exempt untracked paths.
 # local-only projects additionally accept work merged into the local default
@@ -1964,11 +1968,39 @@ teardown_note_dirty_return() {
 
 validate_worktree_teardown_safety() {
   local dirty_raw dirty unpushed_raw unpushed DEFAULT unmerged_raw unmerged branch
+  local index_entries_file index_entry hidden_paths=''
   [ -d "$WT" ] || return 0
   [ "$FORCE" != "--force" ] || return 0
   case "$KIND" in
     secondmate|scout) return 0 ;;
   esac
+
+  # -v lowercases tags for assume-unchanged; S (or s) marks skip-worktree.
+  # Use NUL records so spaces/newlines in paths cannot hide a flagged entry.
+  index_entries_file=$(mktemp "${TMPDIR:-/tmp}/fm-teardown-index.XXXXXX") || {
+    echo "REFUSED: cannot prepare inspection of hidden-index flags in $WT." >&2
+    return 1
+  }
+  if ! git -C "$WT" ls-files -v -z -- > "$index_entries_file" 2>/dev/null; then
+    rm -f "$index_entries_file"
+    echo "REFUSED: cannot inspect worktree $WT for assume-unchanged or skip-worktree entries." >&2
+    echo "Preserve the work and restore index inspection before retrying cleanup." >&2
+    return 1
+  fi
+  while IFS= read -r -d '' index_entry; do
+    case "${index_entry:0:1}" in
+      [[:lower:]]|S)
+        hidden_paths="$hidden_paths$(printf '  %q\n' "${index_entry:2}")"$'\n'
+        ;;
+    esac
+  done < "$index_entries_file"
+  rm -f "$index_entries_file"
+  if [ -n "$hidden_paths" ]; then
+    echo "REFUSED: worktree $WT has tracked entries marked assume-unchanged or skip-worktree." >&2
+    printf '%s' "$hidden_paths" >&2
+    echo "Git status can hide their edits. Preserve and reconcile this work before cleanup; flags and files were left unchanged." >&2
+    return 1
+  fi
 
   if ! dirty_raw=$(git -C "$WT" status --porcelain 2>/dev/null); then
     if worktree_safety_blocked_by_lock "uncommitted changes"; then
