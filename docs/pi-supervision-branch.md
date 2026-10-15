@@ -718,4 +718,4 @@ Pi 1.1 predates the custom-opening boundary, so those custom-event subprobes exp
 It types into an isolated Pi pane while outcomes are delivered and fails if keystroke echo leaves the class of the same machine's extension-free floor.
 
 Record dated current results in [docs/verification/runtime-backends.md](verification/runtime-backends.md).
-The strict typecheck in `tests/fm-pi-primary-types.test.sh` pins the extension against the installed Pi package.
+The [strict production-consumer typecheck](../tests/fm-pi-primary-types.test.sh) owns its pinned SDK/compiler matrix and temporary dependencies independently of the installed Pi runtime.
