@@ -1148,6 +1148,116 @@ fi
 done
 pass "real Pi SDK $PI_VERSION suppresses only empty or exact-repeat retry finals, retains first and differing replies after reopen, buffers retry streaming, and keeps outcomes retryable"
 
+stagehome="$TMP_ROOT/stage-home"
+stagedir="$TMP_ROOT/stage-agent-dir"
+mkdir -p "$stagehome/state" "$stagehome/config" "$stagedir"
+cp "$streamdir/models.json" "$stagedir/models.json"
+BRANCH_PLUGIN="$repo/.pi/extensions/fm-branch-supervision.ts" \
+  FM_HOME="$stagehome" FM_ROOT_OVERRIDE="$ROOT" \
+  PI_CODING_AGENT_DIR="$stagedir" PI_PACKAGE_DIR="$PI_PACKAGE_DIR" \
+  node --input-type=module > "$TMP_ROOT/stage-output" 2>&1 <<'EOF'
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { pathToFileURL } from "node:url";
+const home = process.env.FM_HOME;
+const pkg = process.env.PI_PACKAGE_DIR;
+const sdk = await import(pathToFileURL(`${pkg}/dist/index.js`).href);
+const branchMod = await import(pathToFileURL(process.env.BRANCH_PLUGIN).href);
+const version = JSON.parse(readFileSync(`${pkg}/package.json`, "utf8")).version;
+const currentPrompt = "Please include the current startup request in the branch context.";
+const customText = "Unrelated custom startup context must not become captain dialog.";
+const project = `${home}/projects/staging-probe`;
+mkdirSync(project, { recursive: true });
+writeFileSync(`${home}/state/.lock`, `${process.pid}\n`);
+writeFileSync(`${home}/state/staging-probe.meta`, `project=${project}\nwindow=fm-staging-probe\n`);
+const requests = [];
+const observations = [];
+const errors = [];
+const textOf = (messages) => messages.map((message) => typeof message.content === "string"
+  ? message.content : (message.content ?? []).map((part) => part.text ?? "").join("\n")).join("\n");
+const chunk = (delta, finish) => `data: ${JSON.stringify({
+  id: "stage-probe", object: "chat.completion.chunk", created: 1, model: "fm-live-stream-model",
+  choices: [{ index: 0, delta, finish_reason: finish }],
+})}\n\n`;
+globalThis.fetch = async (input, options) => {
+  const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+  if (!url.startsWith("https://fm-live-stream.invalid/")) throw new Error(`unexpected provider: ${url}`);
+  requests.push(JSON.parse(options.body));
+  return new Response(chunk({ role: "assistant", content: "ACK" }, null) + chunk({}, "stop") + "data: [DONE]\n\n", {
+    headers: { "content-type": "text/event-stream" },
+  });
+};
+const agentDir = process.env.PI_CODING_AGENT_DIR;
+const settings = sdk.SettingsManager.create(home, agentDir);
+const manager = sdk.SessionManager.inMemory(home);
+const loader = new sdk.DefaultResourceLoader({
+  cwd: home, agentDir, settingsManager: settings,
+  noExtensions: true, noSkills: true, noPromptTemplates: true, noThemes: true, noContextFiles: true,
+  extensionFactories: [branchMod.default, (pi) => {
+    pi.on("before_agent_start", async (event) => {
+      const isUser = "prompt" in event;
+      if (isUser && event.prompt !== currentPrompt) throw new Error("unexpected prompt in startup probe");
+      if (isUser && version.startsWith("1.1.") && "messageType" in event) throw new Error("SDK1.1 did not emit its prompt-only event");
+      if (isUser && version.startsWith("1.2.") && event.messageType !== "user") throw new Error("SDK1.2 user discriminator missing");
+      if (!isUser && (event.messageType !== "custom" || event.message.content !== customText)) throw new Error("unexpected no-prompt trigger");
+      if (textOf(manager.buildSessionContext().messages).includes(currentPrompt)) throw new Error("current prompt was already persisted before startup wait");
+      writeFileSync(`${home}/state/.wake-queue`, "1\t1\tsignal\tstaging-probe.status\tsignal: startup context probe\n");
+      const offer = {
+        message: "signal: startup context probe", projects: [project], heartbeat: false, eligible: true,
+        accepted: false, settlement: Promise.resolve(),
+        accept(settlement) { this.accepted = true; this.settlement = settlement; },
+      };
+      const requestOffset = requests.length;
+      pi.events.emit("fm-branch-supervision:dispatch", offer);
+      if (!offer.accepted) throw new Error("branch did not accept the startup wake");
+      const failure = await offer.settlement.then(() => null, (error) => error);
+      if (failure?.message !== "supervision branch prompt settled but produced no durable outcome for its claimed wake rows") {
+        throw new Error(`unexpected context-probe settlement: ${failure}`);
+      }
+      const branchRequests = requests.slice(requestOffset).filter((request) => textOf(request.messages).includes("FIRSTMATE SUPERVISION WAKE:"));
+      if (branchRequests.length !== 1) throw new Error(`expected one actual branch request during startup, got ${branchRequests.length}`);
+      const branchText = textOf(branchRequests[0].messages);
+      observations.push({ isUser, event, branchRequests, persisted: manager.buildSessionContext().messages });
+      if (textOf(manager.buildSessionContext().messages).includes(currentPrompt)) throw new Error("main persisted current prompt while its later handler awaited the branch");
+      if (isUser && !branchText.includes(`[captain] ${currentPrompt}`)) throw new Error("actual branch provider request lost the current startup user prompt");
+      if (branchText.includes(`[captain] ${customText}`)) throw new Error("no-prompt custom trigger entered captain dialog");
+    });
+  }],
+});
+await loader.reload();
+if (loader.getExtensions().errors.length) throw new Error(JSON.stringify(loader.getExtensions().errors));
+const runtime = await sdk.ModelRuntime.create({ authPath: `${agentDir}/auth.json`, modelsPath: `${agentDir}/models.json` });
+const registry = new sdk.ModelRegistry(runtime);
+await registry.refresh();
+const { session } = await sdk.createAgentSession({
+  cwd: home, agentDir, settingsManager: settings, resourceLoader: loader, sessionManager: manager,
+  modelRuntime: runtime, model: registry.find("fm-live-stream", "fm-live-stream-model"), noTools: "builtin",
+});
+session.extensionRunner.onError((error) => errors.push(error));
+const timeout = setTimeout(() => { console.error("startup branch-context probe timed out"); process.exit(1); }, 30000);
+try {
+  if (!/^(0\.|1\.[01]\.)/.test(version)) {
+    await session.sendCustomMessage({ customType: "fixture", content: customText, display: false }, { triggerTurn: true });
+  }
+  await session.prompt(currentPrompt);
+  if (!observations.some((observation) => observation.isUser)) throw new Error("real user startup handler did not execute");
+  if (!textOf(manager.buildSessionContext().messages).includes(currentPrompt)) throw new Error("ordinary prompt did not reach stored main history after startup");
+  if (errors.length) throw new Error(JSON.stringify(errors));
+} finally {
+  clearTimeout(timeout);
+  await session.extensionRunner.emit({ type: "session_shutdown", reason: "quit" });
+  session.dispose();
+}
+console.log(`STAGE_OK ${JSON.stringify({ version, observations })}`);
+process.exit(0);
+EOF
+status=$?
+out=$(cat "$TMP_ROOT/stage-output")
+if [ "$status" -ne 0 ] || [[ "$out" != STAGE_OK\ * ]]; then
+  fail "real-SDK startup branch-context guard failed against pi-coding-agent $PI_VERSION: $out"
+fi
+printf '%s\n' "$out"
+pass "real Pi SDK $PI_VERSION stages the current prompt into the actual branch provider request before a later startup handler returns"
+
 # The custom before_agent_start variant was introduced in Pi 1.2.
 # Exercise the vendor event runner, not a fabricated event or a live session.
 case "$PI_VERSION" in
