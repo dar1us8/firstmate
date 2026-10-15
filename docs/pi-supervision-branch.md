@@ -363,7 +363,7 @@ Mirroring happens at two points:
 
 - The idle path mirrors at main's turn end.
 - At a prompt-bearing `before_agent_start`, Pi's authoritative prompt is staged verbatim before SessionManager persists that user entry.
-  Pi 1.2 also emits a custom-message variant without `prompt`; that variant is never staged as captain dialog.
+  Pi 1.1's prompt-only event and Pi 1.2's user event both take this path; no-prompt custom events are never staged as captain dialog.
   The complete current captain message therefore precedes any branch wake accepted after the prompt-bearing boundary.
   The later persisted copy is suppressed, and older dialog entries remain bounded.
 
@@ -710,6 +710,7 @@ Other tests remain where they were:
 
 `FM_PI_BRANCH_LIVE_E2E=1 tests/fm-pi-branch-live-e2e.test.sh` exercises the real installed Pi SDK's immediate active-transcript appendEntry rendering, persistence, custom-entry model exclusion, branch-session surfaces, and watcher-owned fallback after rejected branch settlement.
 The unusable-pin probe observes fallback through a real main AgentSession, extension input and user-message events, stored history, settlement, and intercepted provider requests; only the arm process is a fixture, not a production watcher-continuity proof.
+The startup-context probe checks the actual branch provider request while a later startup handler awaits, before the current prompt enters main's stored history.
 On Pi 1.2, the guard also exercises the vendor's prompt-bearing user and no-prompt custom event boundaries, dedicated processing-run cancellation, and filtering of retained processing history from a subsequent provider request while preserving user and unrelated custom runs.
 Pi 1.1 predates the custom-opening boundary, so those custom-event subprobes explicitly skip there; its applicable user-run control still runs.
 
