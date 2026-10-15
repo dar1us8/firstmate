@@ -277,10 +277,9 @@ type FollowMainResolution =
 // come from Pi's own getSupportedThinkingLevels/clampThinkingLevel, so this
 // array exists for exactly one job the type system cannot do at runtime:
 // rejecting a hand-edited pin token Pi would not recognize at all. The
-// assertion below fails the tracked strict typecheck against the INSTALLED Pi
-// package (tests/fm-pi-primary-types.test.sh) the moment Pi adds or removes a
-// level, in either direction, so the list cannot drift into a stale Firstmate
-// catalog.
+// assertion below fails compilation if the SDK's types add or remove a level,
+// in either direction, so this list cannot drift from the checked vocabulary.
+// tests/fm-pi-primary-types.test.sh owns the checked SDK matrix.
 const BRANCH_EFFORT_LEVELS = ["off", "minimal", "low", "medium", "high", "xhigh", "max"] as const;
 type DeclaredBranchEffort = (typeof BRANCH_EFFORT_LEVELS)[number];
 const piOwnsTheEffortVocabulary: [DeclaredBranchEffort] extends [BranchEffort]
