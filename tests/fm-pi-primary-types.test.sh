@@ -14,10 +14,7 @@ for tool in node npm; do
 done
 
 DEPENDENCY_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/fm-pi-primary-types.XXXXXX")
-cleanup() {
-  rm -rf "$DEPENDENCY_ROOT"
-}
-trap cleanup EXIT
+trap 'rm -rf "$DEPENDENCY_ROOT"' EXIT
 
 printf 'Pi production-consumer typechecks: npm %s\n' "$(npm --version)"
 result=0
@@ -61,11 +58,11 @@ JSON
 
 # Pin the directly imported Pi packages together rather than allowing npm's
 # semver ranges to make the older SDK consumer resolve newer sibling types.
-npm install --prefix "$TMP_ROOT" --ignore-scripts --no-audit --no-fund --save-exact \
+(cd "$TMP_ROOT" && npm install --ignore-scripts --no-audit --no-fund --save-exact \
   "@earendil-works/pi-coding-agent@$version" \
   "@earendil-works/pi-ai@$version" \
   "@earendil-works/pi-tui@$version" \
-  typebox@1.3.27 @types/node@22.19.19 typescript@5.9.3
+  typebox@1.3.27 @types/node@22.19.19 typescript@5.9.3)
 
 # Emit real installed versions and npm-verified package integrity before the
 # temporary lock/vendor tree is removed; compiler diagnostics stay in CI logs.
