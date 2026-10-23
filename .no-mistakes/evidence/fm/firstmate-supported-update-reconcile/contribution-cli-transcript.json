@@ -1,0 +1,200 @@
+{
+  "result": "pass",
+  "driver": "Unmodified product CLI and installed gh against disposable Unix-socket HTTP API using the http_unix_socket setting; no production accounts or data.",
+  "steps": [
+    {
+      "command": "fm-contributions.sh poll",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh arm --if-owned",
+      "exit": 0,
+      "stdout": "registered: state/contributions.check.sh",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh disable",
+      "exit": 0,
+      "stdout": "unregistered: state/contributions.check.sh\ndisabled: config/contributions-poll-disabled",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh arm",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh arm --if-owned",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh poll",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh snapshot scenario-input.json --all",
+      "exit": 0,
+      "stdout": "{\n  \"known\": 1,\n  \"checked\": 1,\n  \"counts\": {\n    \"captain\": 0,\n    \"fleet\": 0,\n    \"maintainer\": 1,\n    \"nobody\": 0\n  },\n  \"unmeasured\": 0,\n  \"complete\": true,\n  \"proven_clear\": true,\n  \"stale_verdicts\": 0,\n  \"missing_verdicts\": 0,\n  \"unreadable_records\": 0,\n  \"valid_until\": 1792764823,\n  \"captain\": [],\n  \"captain_omitted\": 0,\n  \"rows\": [\n    {\n      \"task\": \"issue\",\n      \"url\": \"https://github.com/example/lab/issues/1\",\n      \"kind\": \"issue\",\n      \"checked_at\": \"2026-10-23T13:58:43Z\",\n      \"checked\": true,\n      \"final\": false,\n      \"head\": null,\n      \"verdict\": null,\n      \"reviews\": [],\n      \"distinct_checks\": 0,\n      \"missing_verdicts\": 0,\n      \"pending_checks\": 0,\n      \"failed_checks\": 0,\n      \"stale_verdicts\": 0,\n      \"signals\": [],\n      \"actor\": \"maintainer\",\n      \"reason\": \"awaiting issue triage\",\n      \"tasks\": [\n        \"issue\"\n      ]\n    }\n  ]\n}",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh pending",
+      "exit": 0,
+      "stdout": "[]",
+      "stderr": ""
+    },
+    {
+      "observation": "Disabled poll and all arm variants produced no output or API requests; cached ownership and unrelated check survived.",
+      "api_requests_while_disabled": 0
+    },
+    {
+      "observation": "Maintained parent ignored the same opt-out flag: poll still made three API requests and arm restored registration. Candidate suppresses both, reproducing the regression before/after.",
+      "parent_api_requests_while_disabled": 3,
+      "parent_arm_stdout": "registered: state/contributions.check.sh"
+    },
+    {
+      "command": "fm-contributions.sh disable",
+      "exit": 0,
+      "stdout": "unregistered: state/contributions.check.sh\ndisabled: config/contributions-poll-disabled",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh enable",
+      "exit": 0,
+      "stdout": "registered: state/contributions.check.sh\nenabled: config/contributions-poll-disabled removed",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh pending",
+      "exit": 0,
+      "stdout": "[\n  {\n    \"token\": \"comment:12:2026-10-23T00:00:00Z\",\n    \"type\": \"comment\",\n    \"source\": \"https://github.com/example/lab/issues/1#issuecomment-12\",\n    \"head\": null,\n    \"author\": \"maintainer\",\n    \"body\": \"Synthetic maintainer feedback\",\n    \"task\": \"issue\",\n    \"url\": \"https://github.com/example/lab/issues/1\"\n  }\n]",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh poll",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "observation": "Enable restored authenticated registration; its real CLI poll captured a maintainer comment and exactly one durable wake; replay did not duplicate it.",
+      "pending_count": 1,
+      "durable_wakes": 1
+    },
+    {
+      "command": "fm-contributions.sh poll",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh arm",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "observation": "Disable serialized with an in-flight real-gh poll. Pre-existing arm and poll processes were SIGSTOPped after reaching the real held lock, then resumed after disable completed; neither restored registration nor made an API request.",
+      "disable_stdout": "unregistered: state/contributions.check.sh\ndisabled: config/contributions-poll-disabled",
+      "api_requests_after_disable": 0
+    },
+    {
+      "observation": "While opted out, PR-ready registration performed its explicit GraphQL head read, saved the exact head and armed the independent merge check, without arming contribution polling.",
+      "registration_stdout": "armed: state/delivery.check.sh",
+      "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "command": "fm-contributions.sh disable",
+      "exit": 0,
+      "stdout": "unregistered: state/contributions.check.sh\ndisabled: config/contributions-poll-disabled",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh poll",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh arm",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh enable",
+      "exit": 1,
+      "stdout": "",
+      "stderr": "fm-contributions: opt-out flag is unsafe to remove"
+    },
+    {
+      "observation": "A dangling opt-out symlink suppresses polling and arming; enable refuses unsafe removal.",
+      "api_requests": 0
+    },
+    {
+      "command": "fm-contributions.sh enroll delivery https://github.com/example/lab/pull/2",
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh owned",
+      "exit": 0,
+      "stdout": "[\n  {\n    \"url\": \"https://github.com/example/lab/pull/2\",\n    \"tasks\": [\n      \"delivery\"\n    ],\n    \"final\": false\n  }\n]",
+      "stderr": ""
+    },
+    {
+      "observation": "Explicit enrollment persisted a new owned PR without repository-wide discovery."
+    },
+    {
+      "command": "fm-contributions.sh arm --if-owned",
+      "exit": 0,
+      "stdout": "registered: state/contributions.check.sh",
+      "stderr": ""
+    },
+    {
+      "command": "fm-contributions.sh disable",
+      "exit": 0,
+      "stdout": "unregistered: state/contributions.check.sh\ndisabled: config/contributions-poll-disabled",
+      "stderr": ""
+    },
+    {
+      "observation": "A previously registered shim retained the alternate configuration root and remained forge-silent after disable, even when its caller omitted FM_CONFIG_OVERRIDE.",
+      "api_requests": 0
+    }
+  ],
+  "api_requests": [
+    "/repos/example/lab/issues/1",
+    "/repos/example/lab/issues/1/events",
+    "/repos/example/lab/issues/1/comments",
+    "/repos/example/lab/issues/1",
+    "/repos/example/lab/issues/1/comments",
+    "/repos/example/lab/issues/1/events",
+    "/repos/example/lab/issues/1",
+    "/repos/example/lab/issues/1/comments",
+    "/repos/example/lab/issues/1/events",
+    "/repos/example/lab/issues/1",
+    "/repos/example/lab/issues/1/comments",
+    "/repos/example/lab/issues/1/events",
+    "/repos/example/lab/issues/1",
+    "/repos/example/lab/issues/1/events",
+    "/repos/example/lab/issues/1/comments",
+    {
+      "method": "POST",
+      "path": "/graphql",
+      "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {isDraft,id,number}\n\t\t}\n\t}"
+    },
+    {
+      "method": "POST",
+      "path": "/graphql",
+      "query": "\n\tquery PullRequestByNumber($owner: String!, $repo: String!, $pr_number: Int!) {\n\t\trepository(owner: $owner, name: $repo) {\n\t\t\tpullRequest(number: $pr_number) {headRefOid,id,number}\n\t\t}\n\t}"
+    }
+  ]
+}

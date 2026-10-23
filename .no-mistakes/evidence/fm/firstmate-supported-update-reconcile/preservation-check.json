@@ -1,0 +1,25 @@
+{
+  "tested_head": "8a28417fcf6b57455e3f898dcf9e0d907452e67b",
+  "maintained_parent": "5d718d5d775780c5449313dc4a6f55f7fb3b9b01",
+  "preserved_parent": "bdfb0c7fbf00023df0006cb7921697a95cb02ad6",
+  "preserved_receipt_commits": [
+    "bdfb0c7fbf00023df0006cb7921697a95cb02ad6",
+    "04c394640f3a031d89db3867d0047218099a51a6",
+    "cee73ce22adf6ee7fa1f223dcf768dd3770e3120",
+    "e76156cfff1c0d03fde925e883235bc1f1c6f87b",
+    "f10d303725e01b5873c30807f4b12785e4abf2b4",
+    "a00b33edff380b4da63851bbec21954e2205c89f",
+    "6e0d35b60c431b474f00d26383c0eee2b7629ebd",
+    "660d4dc750552a08a2ce04ebd4b1b3e2fd277c42",
+    "9f38f54dfa7dca68ef153b4ad11d5662115d91f8"
+  ],
+  "all_ancestors": true,
+  "changed_paths": [
+    ".agents/skills/operational-home-layout/SKILL.md",
+    "bin/fm-check-unregister.sh",
+    "bin/fm-contributions.sh",
+    "docs/configuration.md",
+    "tests/fm-contributions.test.sh"
+  ],
+  "runtime_scope": "Contribution opt-out only; marker/event implementations unchanged from maintained parent. No live switch or lifecycle/pool operations performed."
+}
